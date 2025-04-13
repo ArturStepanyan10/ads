@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Создать объявление{% endblock %}
+
+{% block content %}
+<h2>Создать объявление</h2>
+
+<form action="" method="post" class="ad-form">
+    {% csrf_token %}
+    <div class="form-error">{{ form.non_field_errors }}</div>
+
+    {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+                <div class="error">
+                    {{ field.errors }}
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    <button type="submit" class="submit-button">Создать</button>
+</form>
+{% endblock %}
