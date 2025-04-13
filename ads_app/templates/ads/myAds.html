@@ -1,23 +1,32 @@
 {% extends 'base.html' %}
 
-{% block title %}Мои объявления{% endblock %}
+
 
 {% block content %}
-<h2>Мои объявления</h2>
+
+<h2 class="page-title">Мои объявления</h2>
 
 <!-- Кнопка добавления -->
-<a href="{% url 'add_ad' %}" class="add-button">+ Добавить объявление</a>
+<div class="add-button-wrapper">
+    <a href="{% url 'add_ad' %}" class="add-button">+ Создать объявление</a>
+</div>
 
 <!-- Список объявлений -->
 <div class="ads-list">
     {% if ads %}
         {% for ad in ads %}
             <div class="ad-card">
-                <h3>{{ ad.title }}</h3>
-                <p>{{ ad.description|truncatechars:100 }}</p>
-                <small>Категория: {{ ad.category.name }}</small><br>
-                <small>Состояние: {{ ad.condition }}</small>
+                <h3 class="ad-title">{{ ad.title }}</h3>
+                <p class="ad-desc">{{ ad.description }}</p>
+                <div class="ad-meta">
+                    <span>Категория: <strong>{{ ad.category }}</strong></span><br>
+                    <span>Состояние: <strong>{{ ad.condition }}</strong></span>
+                </div>
+                <div class="ad-actions">
+                    <a href="{% url 'edit_ad' ad.pk %}" class="edit-button">Редактировать</a>
+                </div>
             </div>
+
         {% endfor %}
     {% else %}
         <p>У вас пока нет объявлений.</p>
