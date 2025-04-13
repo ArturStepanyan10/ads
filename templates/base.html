@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Бартерная платформа{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Стили -->
+    <link rel="stylesheet" href="{% static 'ads/css/styles.css' %}">
+</head>
+<body class="site-wrapper">
+
+    <!-- Навигация -->
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/">Платформа для обмена вещами</a></h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/">Главная</a></li>
+{#                  <li><a href="{% url 'ad_create' %}">Добавить вещь</a></li>#}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Контент -->
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Футер -->
+    <footer class="site-footer">
+        <div class="container">
+            <small>© {{ current_year }} Бартерная платформа. Все права защищены.</small>
+        </div>
+    </footer>
+
+</body>
+</html>
