@@ -5,14 +5,16 @@ services:
     image: postgres:17-alpine
     container_name: postgres_db
     restart: always
+    environment:
+      POSTGRES_PASSWORD: 123123
+      POSTGRES_USER: ads
+      POSTGRES_DB: ads_db
+    ports:
+      - "54321:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=${DATABASE_NAME}
-      - POSTGRES_USER=${DATABASE_USERNAME}
-      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
-    ports:
-      - "5432:5432"
+
+
 
 volumes:
   postgres_data:
