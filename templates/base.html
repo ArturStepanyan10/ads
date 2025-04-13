@@ -4,7 +4,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Бартерная платформа{% endblock %}</title>
+    <title>{{ title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Стили -->
@@ -18,8 +18,7 @@
             <h1><a href="/">Платформа для обмена вещами</a></h1>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="/">Главная</a></li>
-{#                  <li><a href="{% url 'ad_create' %}">Добавить вещь</a></li>#}
+                    <li><a href="{% url 'my_ads' %}">Мои объявления</a></li>
                 </ul>
             </nav>
         </div>
@@ -34,7 +33,7 @@
     <!-- Футер -->
     <footer class="site-footer">
         <div class="container">
-            <small>© {{ current_year }} Бартерная платформа. Все права защищены.</small>
+            <small>© Платформа для обмена вещами. Все права защищены.</small>
         </div>
     </footer>
 
