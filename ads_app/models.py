@@ -5,7 +5,7 @@ from django.db import models
 class Ad(models.Model):
     title = models.CharField(max_length=255, verbose_name='Название')
     description = models.TextField(verbose_name='Описание')
-    image_url = models.URLField(verbose_name='Адрес фото')
+    image_url = models.URLField(verbose_name='Адрес фото', blank=True, null=True)
     category = models.CharField(max_length=100, verbose_name='Категория')
     condition = models.CharField(max_length=100, verbose_name='Состояние')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
@@ -31,9 +31,9 @@ class ExchangeProposal(models.Model):
                               verbose_name='Статус')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     ad_sender = models.ForeignKey(Ad, related_name='sent_proposals', on_delete=models.CASCADE,
-                                  verbose_name='Отправитель')
+                                  verbose_name='Объявление отправителя')
     ad_receiver = models.ForeignKey(Ad, related_name='received_proposals', on_delete=models.CASCADE,
-                                    verbose_name='Получатель')
+                                    verbose_name='Объявление получателя')
 
     def __str__(self):
         return f"{self.ad_sender.user} : {self.ad_receiver.user} {self.status}"
