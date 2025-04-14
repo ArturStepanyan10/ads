@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.http import HttpResponseForbidden, Http404
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
@@ -59,5 +60,17 @@ class UpdateAd(UpdateView):
     extra_context = {
         'title': title_page,
     }
+
+
+class DeleteAd(DeleteView):
+    model = Ad
+    success_url = reverse_lazy("my_ads")
+
+    def get_object(self, queryset=None):
+        ad = get_object_or_404(Ad, pk=self.kwargs.get('pk'))
+        if ad.user != self.request.user:
+            raise Http404("Объявление не найдено")
+        return ad
+
 
 

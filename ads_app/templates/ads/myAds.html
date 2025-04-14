@@ -21,10 +21,16 @@
                 <div class="ad-meta">
                     <span>Категория: <strong>{{ ad.category }}</strong></span><br>
                     <span>Состояние: <strong>{{ ad.condition }}</strong></span>
+{#                    <span><strong>{{ ad.image_url }}</strong></span>#}
                 </div>
                 <div class="ad-actions">
                     <a href="{% url 'edit_ad' ad.pk %}" class="edit-button">Редактировать</a>
+                    <form action="{% url 'delete_ad' ad.pk %}" method="post" class="delete-form">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-button" onclick="return confirm('Удалить объявление?')">Удалить</button>
+                    </form>
                 </div>
+
             </div>
 
         {% endfor %}
