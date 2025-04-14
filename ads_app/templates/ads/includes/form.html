@@ -1,9 +1,4 @@
-{% extends 'base.html' %}
-
-{% block content %}
-<h2>Создать объявление</h2>
-
-<form action="" method="post" class="ad-form">
+<form action="" method="post" class="form">
     {% csrf_token %}
     <div class="form-error">{{ form.non_field_errors }}</div>
 
@@ -21,4 +16,3 @@
 
     <button type="submit" class="submit-button">Отправить</button>
 </form>
-{% endblock %}
