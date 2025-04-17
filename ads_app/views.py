@@ -108,7 +108,20 @@ class ExchangeOfferList(LoginRequiredMixin, ListView):
     }
 
     def get_queryset(self):
-        return ExchangeProposal.objects.filter(ad_receiver__user=self.request.user)
+        queryset = ExchangeProposal.objects.filter(ad_receiver__user=self.request.user)
+
+        sender = self.request.GET.get('sender')
+        receiver = self.request.GET.get('receiver')
+        status = self.request.GET.get('status')
+
+        if sender:
+            queryset = queryset.filter(ad_sender__user__username__icontains=sender)
+        if receiver:
+            queryset = queryset.filter(ad_receiver__user__username__icontains=receiver)
+        if status:
+            queryset = queryset.filter(status=status)
+
+        return queryset
 
 
 def offer_action(request, pk):
