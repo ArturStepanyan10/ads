@@ -22,9 +22,9 @@ class Ad(models.Model):
 
 class ExchangeProposal(models.Model):
     class Status(models.TextChoices):
-        AWAITING = 'ОЖИДАЕТ'
-        ACCEPTED = 'ПРИНЯТА'
-        REJECTED = 'ОТКЛОНЕНА'
+        AWAITING = 'AWAITING', 'ОЖИДАЕТ'
+        ACCEPTED = 'ACCEPTED', 'ПРИНЯТА'
+        REJECTED = 'REJECTED', 'ОТКЛОНЕНА'
 
     comment = models.TextField(verbose_name='Комментарий')
     status = models.CharField(max_length=50, choices=Status.choices, default=Status.AWAITING,
@@ -36,7 +36,7 @@ class ExchangeProposal(models.Model):
                                     verbose_name='Объявление получателя')
 
     def __str__(self):
-        return f"{self.ad_sender.user} : {self.ad_receiver.user} {self.status}"
+        return f"{self.ad_sender.title} : {self.ad_receiver.title} - {self.status}"
 
     class Meta:
         verbose_name = 'Предложение обмена'
