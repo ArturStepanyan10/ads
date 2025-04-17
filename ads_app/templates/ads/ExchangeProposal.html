@@ -1,0 +1,8 @@
+{% extends 'base.html'%}
+{% block content %}
+    <div class="offers-header">
+        <h2 class="offers-title">Предложения на обмен</h2>
+        <a href="{% url 'my_list_offers' %}" class="my-offers-link">Мои предложения</a>
+    </div>
+    {% include 'ads/includes/listOffers.html' %}
+{% endblock %}

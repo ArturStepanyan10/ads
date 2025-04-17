@@ -79,6 +79,35 @@ main {
     text-decoration: none;
 }
 
+.add-button {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.add-button:hover {
+    background-color: #2980b9;
+}
+
+.ads-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.ad-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
 .button:hover {
     background-color: #357abd;
 }
@@ -97,3 +126,250 @@ main {
     height: auto;
     border-radius: 4px;
 }
+
+.form {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #fdfdfd;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 1rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 4px rgba(52, 152, 219, 0.4);
+    outline: none;
+}
+
+.error {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.submit-button {
+    padding: 12px 25px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #2980b9;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.add-button-wrapper {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.add-button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.add-button:hover {
+    background-color: #2980b9;
+}
+
+.ads-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ad-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s;
+}
+
+.ad-card:hover {
+    transform: translateY(-3px);
+}
+
+.ad-title {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+    color: #2c3e50;
+}
+
+.ad-desc {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    color: #555;
+}
+
+.ad-meta {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.ad-meta img {
+        max-width: 200px;
+        max-height: 200px;
+        object-fit: cover;
+        margin-top: 10px;
+        border-radius: 8px;
+    }
+
+.ad-actions {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.edit-button,
+.delete-button {
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+}
+
+.edit-button {
+    background-color: #3498db;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #2980b9;
+}
+
+.delete-form {
+    margin: 0;
+}
+
+.delete-button {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #c0392b;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-main {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links,
+.auth-links {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+}
+
+.auth-links a {
+    text-decoration: none;
+    color: #333;
+}
+
+.btn-action {
+        padding: 6px 12px;
+        margin: 5px 4px 0 0;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+}
+
+.btn-accept {
+    background-color: #28a745;
+}
+
+.btn-reject {
+    background-color: #dc3545;
+}
+
+.offers-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 15px;
+}
+
+.offers-title {
+    margin: 0;
+    display: inline-block;
+}
+
+.my-offers-link {
+    background-color: #4a76a8;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.my-offers-link:hover {
+    background-color: #3a5f8a;
+}
+
+
