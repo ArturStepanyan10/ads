@@ -71,8 +71,13 @@ class AddAd(LoginRequiredMixin, CreateView):
     }
 
     def form_valid(self, form):
-        ad = form.save(commit=False)
-        ad.user = self.request.user
+        try:
+            ad = form.save(commit=False)
+            ad.user = self.request.user
+        except Exception as e:
+            form.add_error(None, f"Ошибка при сохранении объявления: {e}")
+            return self.form_invalid(form)
+
         return super().form_valid(form)
 
 
@@ -85,6 +90,12 @@ class UpdateAd(UpdateView):
     extra_context = {
         'title': title_page,
     }
+
+    def get_object(self, queryset=None):
+        ad = get_object_or_404(Ad, pk=self.kwargs['pk'])
+        if ad.user != self.request.user:
+            raise Http404('Объявление не найдено')
+        return ad
 
 
 class DeleteAd(LoginRequiredMixin, DeleteView):
@@ -113,8 +124,12 @@ class ExchangeOffer(LoginRequiredMixin, CreateView):
         return kwargs
 
     def form_valid(self, form):
+        try:
+            ad_receiver = get_object_or_404(Ad, pk=self.kwargs.get('pk'))
+        except Ad.DoesNotExist:
+            raise Http404('Объявление для обмена не найдено')
+
         ep = form.save(commit=False)
-        ad_receiver = get_object_or_404(Ad, pk=self.kwargs.get('pk'))
         ep.ad_receiver = ad_receiver
         return super().form_valid(form)
 
