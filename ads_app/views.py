@@ -1,6 +1,7 @@
 from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
+from django.db.models import Q
 from django.http import HttpResponseForbidden, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
@@ -15,14 +16,34 @@ class Home(LoginRequiredMixin, ListView):
     template_name = 'ads/index.html'
     title_page = 'Главная страница'
     context_object_name = 'ads'
+    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = self.title_page
+        context['search_query'] = self.request.GET.get('q', '')
+        context['category_filter'] = self.request.GET.get('category', '')
+        context['condition_filter'] = self.request.GET.get('condition', '')
         return context
 
     def get_queryset(self):
-        return Ad.objects.exclude(user=self.request.user)
+        queryset = Ad.objects.exclude(user=self.request.user)
+        query = self.request.GET.get('q')
+        category = self.request.GET.get('category')
+        condition = self.request.GET.get('condition')
+
+        if query:
+            queryset = queryset.filter(
+                Q(title__icontains=query) | Q(description__icontains=query)
+            )
+
+        if category:
+            queryset = queryset.filter(category=category)
+
+        if condition:
+            queryset = queryset.filter(condition=condition)
+
+        return queryset.order_by('-id')
 
 
 class MyAds(LoginRequiredMixin, ListView):
@@ -55,7 +76,7 @@ class AddAd(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class UpdateAd(UpdateView): #PermissionRequiredMixin
+class UpdateAd(UpdateView):
     model = Ad
     fields = ['title', 'description', 'image_url', 'category', 'condition']
     template_name = 'ads/AddAd.html'
