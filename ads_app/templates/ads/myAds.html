@@ -1,9 +1,7 @@
+<!-- Базовый шаблон -->
 {% extends 'base.html' %}
 
-
-
 {% block content %}
-
 <h2 class="page-title">Мои объявления</h2>
 
 <!-- Кнопка добавления -->
@@ -11,31 +9,6 @@
     <a href="{% url 'add_ad' %}" class="add-button">+ Создать объявление</a>
 </div>
 
-<!-- Список объявлений -->
-<div class="ads-list">
-    {% if ads %}
-        {% for ad in ads %}
-            <div class="ad-card">
-                <h3 class="ad-title">{{ ad.title }}</h3>
-                <p class="ad-desc">{{ ad.description }}</p>
-                <div class="ad-meta">
-                    <span>Категория: <strong>{{ ad.category }}</strong></span><br>
-                    <span>Состояние: <strong>{{ ad.condition }}</strong></span>
-{#                    <span><strong>{{ ad.image_url }}</strong></span>#}
-                </div>
-                <div class="ad-actions">
-                    <a href="{% url 'edit_ad' ad.pk %}" class="edit-button">Редактировать</a>
-                    <form action="{% url 'delete_ad' ad.pk %}" method="post" class="delete-form">
-                        {% csrf_token %}
-                        <button type="submit" class="delete-button" onclick="return confirm('Удалить объявление?')">Удалить</button>
-                    </form>
-                </div>
-
-            </div>
-
-        {% endfor %}
-    {% else %}
-        <p>У вас пока нет объявлений.</p>
-    {% endif %}
-</div>
+<!-- Шаблон списка объявлений -->
+{% include 'ads/includes/listAds.html' %}
 {% endblock %}

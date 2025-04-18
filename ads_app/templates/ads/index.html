@@ -1,0 +1,54 @@
+<!-- Базовый шаблон -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- Фильтрация -->
+    <form method="get" class="mb-4">
+        <label>
+            <input type="text" name="q" placeholder="Поиск..." value="{{ search_query }}">
+        </label>
+
+        <label>
+            <select name="category">
+            <option value="">Все категории</option>
+            <option value="technic" {% if category_filter == 'technic' %}selected{% endif %}>Техника</option>
+            <option value="clothes" {% if category_filter == 'clothes' %}selected{% endif %}>Одежда</option>
+            <option value="electronics" {% if category_filter == 'electronics' %}selected{% endif %}>Одежда</option>
+            <!--...-->
+        </select>
+        </label>
+
+        <label>
+            <select name="condition">
+            <option value="">Любое состояние</option>
+            <option value="new" {% if condition_filter == 'new' %}selected{% endif %}>Новое</option>
+            <option value="used" {% if condition_filter == 'used' %}selected{% endif %}>Б/У</option>
+            <!-- ... -->
+        </select>
+        </label>
+
+        <button type="submit">Поиск</button>
+</form><br/>
+
+    <!-- Список объявлений -->
+    {% include 'ads/includes/listAds.html' %}
+
+    <!-- Пагинация -->
+    <div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}
+                  {% if request.GET.category %}category={{ request.GET.category }}&{% endif %}
+                  {% if request.GET.condition %}condition={{ request.GET.condition }}&{% endif %}
+                  page={{ page_obj.previous_page_number }}">Назад</a>
+    {% endif %}
+
+    <span>Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+
+    {% if page_obj.has_next %}
+        <a href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}
+                  {% if request.GET.category %}category={{ request.GET.category }}&{% endif %}
+                  {% if request.GET.condition %}condition={{ request.GET.condition }}&{% endif %}
+                  page={{ page_obj.next_page_number }}">Вперёд</a>
+    {% endif %}
+</div>
+{% endblock %}

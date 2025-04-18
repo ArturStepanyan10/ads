@@ -1,0 +1,27 @@
+<div class="ads-list">
+        {% if offers %}
+            {% for of in offers %}
+                <div class="ad-card">
+                    <h3 class="ad-title">{{ of.ad_sender }} → {{ of.ad_receiver }}</h3>
+                    <p class="ad-desc">{{ of.comment }}</p>
+                    <span>Статус: <strong>{{ of.get_status_display }}</strong></span><br />
+                    {% if request.user == of.ad_receiver.user and of.status == of.Status.AWAITING%}
+                        <form method="post" action="{% url 'offer_action' of.pk %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="accept">
+                            <button type="submit" class="btn-action btn-accept">Принять</button>
+                        </form>
+
+                        <form method="post" action="{% url 'offer_action' of.pk %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="reject">
+                            <button type="submit" class="btn-action btn-reject">Отклонить</button>
+                        </form>
+                    {% endif %}
+                </div>
+
+            {% endfor %}
+        {% else %}
+            <p>Предложений пока нет</p>
+        {% endif %}
+    </div>
