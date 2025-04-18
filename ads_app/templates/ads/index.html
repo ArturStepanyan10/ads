@@ -1,6 +1,8 @@
+<!-- Базовый шаблон -->
 {% extends 'base.html' %}
 
 {% block content %}
+    <!-- Фильтрация -->
     <form method="get" class="mb-4">
         <label>
             <input type="text" name="q" placeholder="Поиск..." value="{{ search_query }}">
@@ -27,8 +29,11 @@
 
         <button type="submit">Поиск</button>
 </form><br/>
-{% include 'ads/includes/listAds.html' %}
 
+    <!-- Список объявлений -->
+    {% include 'ads/includes/listAds.html' %}
+
+    <!-- Пагинация -->
     <div class="pagination">
     {% if page_obj.has_previous %}
         <a href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}

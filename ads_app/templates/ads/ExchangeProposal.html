@@ -1,5 +1,8 @@
+<!-- Базовый шаблон -->
 {% extends 'base.html'%}
+
 {% block content %}
+    <!-- Фильтрация -->
     <form method="get" class="filter-form">
         <label>
             <input type="text" name="sender" placeholder="Отправитель" value="{{ request.GET.sender }}">
@@ -21,7 +24,11 @@
 </form>
     <div class="offers-header">
         <h2 class="offers-title">Предложения на обмен</h2>
+
+        <!-- Ссылка на страницу  -->
         <a href="{% url 'my_list_offers' %}" class="my-offers-link">Мои предложения</a>
     </div>
+
+    <!-- Шаблон на список предложений -->
     {% include 'ads/includes/listOffers.html' %}
 {% endblock %}

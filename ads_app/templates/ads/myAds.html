@@ -1,9 +1,7 @@
+<!-- Базовый шаблон -->
 {% extends 'base.html' %}
 
-
-
 {% block content %}
-
 <h2 class="page-title">Мои объявления</h2>
 
 <!-- Кнопка добавления -->
@@ -11,6 +9,6 @@
     <a href="{% url 'add_ad' %}" class="add-button">+ Создать объявление</a>
 </div>
 
-<!-- Список объявлений -->
+<!-- Шаблон списка объявлений -->
 {% include 'ads/includes/listAds.html' %}
 {% endblock %}
