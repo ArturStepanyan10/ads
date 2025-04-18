@@ -6,36 +6,45 @@
     <meta charset="UTF-8">
     <title>{{ title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Стили -->
     <link rel="stylesheet" href="{% static 'ads/css/styles.css' %}">
 </head>
 <body class="site-wrapper">
 
-    <!-- Навигация -->
-    <header class="site-header">
-        <div class="container">
-            <h1><a href="/">Платформа для обмена вещами</a></h1>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="{% url 'my_ads' %}">Мои объявления</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<header class="site-header">
+    <div class="container">
+        <div class="header-top" style="display: flex; justify-content: space-between; align-items: center;">
+            <h1><a href="{% url 'index' %}">Платформа для обмена вещами</a></h1>
 
-    <!-- Контент -->
-    <main class="container">
-        {% block content %}
-        {% endblock %}
-    </main>
-
-    <!-- Футер -->
-    <footer class="site-footer">
-        <div class="container">
-            <small>© Платформа для обмена вещами. Все права защищены.</small>
+            <div class="auth-links" style="text-align: right;">
+                {% if user.is_authenticated %}
+                    <span><strong>{{ user.username }}</strong></span>
+                    <span><a href="{% url 'logout' %}">Выйти</a></span>
+                {% else %}
+                    <span><a href="{% url 'login' %}">Войти</a></span>
+                {% endif %}
+            </div>
         </div>
-    </footer>
+
+        <!-- Главное меню -->
+        <nav class="nav-main" style="margin-top: 10px;">
+            <ul class="nav-links" style="display: flex; gap: 15px;">
+                <li><a href="{% url 'my_ads' %}">Мои объявления</a></li>
+                <li><a href="{% url 'list_offers' %}">Предложения на обмен</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <small>© Платформа для обмена вещами. Все права защищены.</small>
+    </div>
+</footer>
 
 </body>
 </html>
